@@ -1,0 +1,1 @@
+This directory conatins the embedding model from fast test for english language
