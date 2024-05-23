@@ -66,9 +66,7 @@ def generate_jwt(api, payload):
     return encoded_jwt
 
 
-
-
-def create_new_collection(url, jwt, collection_name, df, batch_size):
+def create_new_collection(url, jwt, collection_name, df, vector_size, batch_size, delete_prev = False, create_from_scratch = False):
 
     '''
     This function creates a new collection in Qdrant Vector Database
@@ -97,14 +95,16 @@ def create_new_collection(url, jwt, collection_name, df, batch_size):
     # delete the collection if it already exists
     # remove or comment this line if you want to keep the existing collection
     # and want to use the existing collection to update new points
-    client.delete_collection(collection_name=collection_name)
+    if delete_prev:
+        client.delete_collection(collection_name=collection_name)
 
     # Create a fresh collection in Qdrant
     # remove or comment this line if you do not want to create a new collection
-    client.create_collection(
-    collection_name=collection_name,
-    vectors_config=VectorParams(size=300, distance=Distance.COSINE),
-    )
+    if create_from_scratch:
+        client.create_collection(
+        collection_name=collection_name,
+        vectors_config=VectorParams(size=vector_size, distance=Distance.COSINE),
+        )
 
     # Update the Qdrant Vector Database with the embeddings
     # We are updating the embeddings in batches
@@ -122,5 +122,3 @@ def create_new_collection(url, jwt, collection_name, df, batch_size):
     client.close()
 
     print(f"Collection {collection_name} created and updated with the embeddings")
-
-    return client
