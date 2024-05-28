@@ -49,3 +49,6 @@ You can add more security scenarios based on your requirements.
 
 ## Conclusion
 Role-Based Access Control (RBAC) in Qdrant Vector Database is a powerful feature that allows granular access control of data. By setting up RBAC, you can limit the access of users to specific collections, documents, and even specific pages of documents. This feature is useful in scenarios where the data stored in the database is sensitive and should only be accessed by authorized users.
+
+## References
+To know more in detail about RBAC, follow my blog that I wrote on the same topic: [Enhancing Data Security with Role-Based Access Control of Qdrant Vector Database](https://medium.com/@quamernasim/enhancing-data-security-with-role-based-access-control-of-qdrant-vector-database-3878769bec83)
